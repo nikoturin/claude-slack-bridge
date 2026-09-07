@@ -55,7 +55,7 @@ claude-slack-bridge/
 ## Quick Start
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/claude-slack-bridge.git
+git clone https://github.com/nikoturin/claude-slack-bridge.git
 cd claude-slack-bridge
 npm install
 cp .env.example .env && nano .env
