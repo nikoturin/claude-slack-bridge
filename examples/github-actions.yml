@@ -1,0 +1,26 @@
+# NOTE: Experimental — requires a self-hosted runner on the same server as the bridge
+
+name: CI with Slack Approval
+on:
+  push:
+    branches: [main, develop]
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test
+        id: tests
+        run: npm install && npm test
+        continue-on-error: true
+      - name: Notify success
+        if: steps.tests.outcome == 'success'
+        run: bash /opt/claude-slack-bridge/hooks/on-complete.sh "[my-project] Tests passed on ${{ github.ref_name }}"
+      - name: Ask approval on failure
+        if: steps.tests.outcome == 'failure'
+        run: |
+          RESPONSE=$(bash /opt/claude-slack-bridge/hooks/on-question.sh "[my-project] Tests failed on ${{ github.ref_name }} — deploy anyway?")
+          [[ "$RESPONSE" =~ ^(yes|si|deploy)$ ]] && echo "APPROVED=true" >> $GITHUB_ENV || echo "APPROVED=false" >> $GITHUB_ENV
+      - name: Deploy
+        if: steps.tests.outcome == 'success' || env.APPROVED == 'true'
+        run: echo "deploy here"

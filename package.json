@@ -1,0 +1,15 @@
+{
+  "name": "claude-slack-bridge",
+  "version": "2.0.0",
+  "description": "Bidirectional bridge between Claude Code CLI and Slack",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js"
+  },
+  "dependencies": {
+    "@slack/bolt": "^3.21.1"
+  },
+  "keywords": ["claude", "slack", "claude-code", "bridge", "ai", "devtools"],
+  "license": "MIT"
+}

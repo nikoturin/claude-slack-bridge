@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": []
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/opt/claude-slack-bridge/hooks/on-complete.sh \"Claude ha terminado la tarea actual\""
+          }
+        ]
+      }
+    ]
+  }
+}

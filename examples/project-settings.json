@@ -1,0 +1,15 @@
+{
+  "permissions": { "allow": [] },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/opt/claude-slack-bridge/hooks/on-complete.sh \"[my-project] Claude finished a task\""
+          }
+        ]
+      }
+    ]
+  }
+}
